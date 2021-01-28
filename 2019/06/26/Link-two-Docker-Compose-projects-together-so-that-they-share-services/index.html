@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="YfMvj5FvFivZGWDtu2FiAPf6Mn1PVOkUZXyXBXASZi0" />
+  
+
+  
+  <title>Link two Docker Compose projects together so that they share services | Max&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Another day I was working on a project where we had two repositories like this: First: I will call it “Service X”:  PHP MongoDB RabbitMQ  First: I will call it “Magento”  PHP Nginx MySql RabbitMQ  Bot">
+<meta name="keywords" content="php,docker,docker-compose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Link two Docker Compose projects together so that they share services">
+<meta property="og:url" content="https://maxhopei.github.io/2019/06/26/Link-two-Docker-Compose-projects-together-so-that-they-share-services/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="Another day I was working on a project where we had two repositories like this: First: I will call it “Service X”:  PHP MongoDB RabbitMQ  First: I will call it “Magento”  PHP Nginx MySql RabbitMQ  Bot">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-31T12:34:55.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Link two Docker Compose projects together so that they share services">
+<meta name="twitter:description" content="Another day I was working on a project where we had two repositories like this: First: I will call it “Service X”:  PHP MongoDB RabbitMQ  First: I will call it “Magento”  PHP Nginx MySql RabbitMQ  Bot">
+  
+    <link rel="alternate" href="/atom.xml" title="Max&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h6 id="logo-wrap">
+        <a href="/" id="logo">Max&#39;s Blog</a>
+      </h6>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maxhopei.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Link-two-Docker-Compose-projects-together-so-that-they-share-services" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/26/Link-two-Docker-Compose-projects-together-so-that-they-share-services/" class="article-date">
+  <time datetime="2019-06-26T20:13:06.000Z" itemprop="datePublished">2019-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Link two Docker Compose projects together so that they share services
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Another day I was working on a project where we had two repositories like this:</p>
+<p>First: I will call it “Service X”:</p>
+<ul>
+<li>PHP</li>
+<li>MongoDB</li>
+<li>RabbitMQ</li>
+</ul>
+<p>First: I will call it “Magento”</p>
+<ul>
+<li>PHP</li>
+<li>Nginx</li>
+<li>MySql</li>
+<li>RabbitMQ</li>
+</ul>
+<p>Both repositories was set up with Docker Compose. And we needed to join them in the way so that Magento communicates with Service X via RabbitMQ.<br>At the same time we wanted both repositories to be independant from each other, so one can bring them up separately.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/06/26/Link-two-Docker-Compose-projects-together-so-that-they-share-services/" data-id="ck2epv0r6000kccvm5614muy3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Using Xdebug with Docker Compose and PhpStorm</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blackfire/">blackfire</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose-with-php/">docker-compose-with-php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/">function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interface/">interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/performance/">performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/profiling/">profiling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/valueobject/">valueobject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xdebug/">xdebug</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/blackfire/" style="font-size: 10px;">blackfire</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 16.67px;">docker-compose</a> <a href="/tags/docker-compose-with-php/" style="font-size: 13.33px;">docker-compose-with-php</a> <a href="/tags/function/" style="font-size: 10px;">function</a> <a href="/tags/interface/" style="font-size: 10px;">interface</a> <a href="/tags/performance/" style="font-size: 10px;">performance</a> <a href="/tags/php/" style="font-size: 20px;">php</a> <a href="/tags/profiling/" style="font-size: 10px;">profiling</a> <a href="/tags/valueobject/" style="font-size: 10px;">valueobject</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/xdebug/" style="font-size: 10px;">xdebug</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/26/Link-two-Docker-Compose-projects-together-so-that-they-share-services/">Link two Docker Compose projects together so that they share services</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/">Using Xdebug with Docker Compose and PhpStorm</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/">Integrating Blackfire.io with Docker Compose</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/25/Docker-Compose-setup-for-PHP-project/">Docker Compose setup for PHP project</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/15/Another-naming-problem-reasoning/">Another naming problem reasoning</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Max Hopei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
