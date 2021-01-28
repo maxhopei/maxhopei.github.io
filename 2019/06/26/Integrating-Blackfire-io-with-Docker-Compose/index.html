@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="YfMvj5FvFivZGWDtu2FiAPf6Mn1PVOkUZXyXBXASZi0" />
+  
+
+  
+  <title>Integrating Blackfire.io with Docker Compose | Max&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Blackfire Integration with Docker is fully covered in the official documentation: https:&#x2F;&#x2F;blackfire.io&#x2F;docs&#x2F;integrations&#x2F;dockerBut here is a short summary on how you add support of Blackfire to your p">
+<meta name="keywords" content="docker,docker-compose,php,docker-compose-with-php,blackfire,performance,profiling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Integrating Blackfire.io with Docker Compose">
+<meta property="og:url" content="https:&#x2F;&#x2F;maxhopei.github.io&#x2F;2019&#x2F;06&#x2F;26&#x2F;Integrating-Blackfire-io-with-Docker-Compose&#x2F;index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="Blackfire Integration with Docker is fully covered in the official documentation: https:&#x2F;&#x2F;blackfire.io&#x2F;docs&#x2F;integrations&#x2F;dockerBut here is a short summary on how you add support of Blackfire to your p">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-31T12:34:55.973Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Max&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h6 id="logo-wrap">
+        <a href="/" id="logo">Max&#39;s Blog</a>
+      </h6>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maxhopei.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Integrating-Blackfire-io-with-Docker-Compose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/" class="article-date">
+  <time datetime="2019-06-26T07:05:32.000Z" itemprop="datePublished">2019-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Integrating Blackfire.io with Docker Compose
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Blackfire Integration with Docker is fully covered in the official documentation: <a href="https://blackfire.io/docs/integrations/docker" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/docker</a><br>But here is a short summary on how you add support of Blackfire to your project Docker Compose setup.</p>
+<h2 id="Pre-requisites"><a href="#Pre-requisites" class="headerlink" title="Pre-requisites"></a>Pre-requisites</h2><h3 id="1-You’ll-need-to-have-a-Blackfire-account"><a href="#1-You’ll-need-to-have-a-Blackfire-account" class="headerlink" title="1. You’ll need to have a Blackfire account"></a>1. You’ll need to have a Blackfire account</h3><p>Blackfire stores all profiles on their servers so you need access to them.<br>You will be given a Server ID, Server Token, Client ID and Client Token, which you will need later for configuration. These could be found here: <a href="https://blackfire.io/my/settings/credentials" target="_blank" rel="noopener">https://blackfire.io/my/settings/credentials</a>.</p>
+<h3 id="2-You’ll-most-probably-need-a-Blackfire-Companion-in-your-browser"><a href="#2-You’ll-most-probably-need-a-Blackfire-Companion-in-your-browser" class="headerlink" title="2. You’ll (most probably) need a Blackfire Companion in your browser"></a>2. You’ll (most probably) need a Blackfire Companion in your browser</h3><p>It connects to your account and helps starting profiling directly from your browser. Install and configure it as described here:</p>
+<ul>
+<li>Chrome: <a href="https://blackfire.io/docs/integrations/chrome" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/chrome</a></li>
+<li>Firefox: <a href="https://blackfire.io/docs/integrations/firefox" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/firefox</a></li>
+</ul>
+<h2 id="Integrate-Blackfire-with-your-Docker-Compose"><a href="#Integrate-Blackfire-with-your-Docker-Compose" class="headerlink" title="Integrate Blackfire with your Docker Compose"></a>Integrate Blackfire with your Docker Compose</h2><h3 id="1-Add-Blackfire-Agent-to-your-network"><a href="#1-Add-Blackfire-Agent-to-your-network" class="headerlink" title="1. Add Blackfire Agent to your network"></a>1. Add Blackfire Agent to your network</h3><p>Blackfire Agent sends your local profiling results to the Blackfire servers. The easiest way is to add it as a separate container using the official <a href="https://hub.docker.com/r/blackfire/blackfire/" target="_blank" rel="noopener">blackfire/blackfire</a> image:</p>
+<p><strong>docker-compose.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  blackfire_agent:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">blackfire/blackfire</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>The Agent needs <strong>Server ID</strong> and <strong>Server Token</strong> to communicate with Blackfire API. You can configure it using environment variables.</p>
+<p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  blackfire_agent:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="attr">      BLACKFIRE_SERVER_ID:</span> <span class="string">&lt;Your</span> <span class="string">Server</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">      BLACKFIRE_SERVER_TOKEN:</span> <span class="string">&lt;Your</span> <span class="string">Server</span> <span class="string">Token&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Find out more about <code>docker-compose.override.yaml</code> file here: <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/#Using-override-file">Using override file</a>.</p>
+<h3 id="2-Add-Blackfire-PHP-Probe-and-CLI-tool-to-your-application-container"><a href="#2-Add-Blackfire-PHP-Probe-and-CLI-tool-to-your-application-container" class="headerlink" title="2. Add Blackfire PHP Probe and CLI tool to your application container"></a>2. Add Blackfire PHP Probe and CLI tool to your application container</h3><p>Blackfire Probe collects the execution stats and sends it to the Agent.</p>
+<p>Considering that we base on PHP-FPM image add the following lines to your php Dockerfile:</p>
+<p><strong>Dockerfile</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.2</span>-fpm</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># You will need these to run commands below</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y \</span></span><br><span class="line"><span class="bash">    wget \</span></span><br><span class="line"><span class="bash">    gnupg2</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install Blackfire CLI tool and PHP Probe</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget -q -O - https://packages.blackfire.io/gpg.key | apt-key add -</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"deb http://packages.blackfire.io/debian any main"</span> | tee /etc/apt/sources.list.d/blackfire.list</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y blackfire-agent blackfire-php</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>The CLI tool needs <strong>Client ID</strong> and <strong>Client Token</strong> to communicate with Blackfire API. You can configure it using environment variables.</p>
+<p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  your_php_app_service:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="attr">      BLACKFIRE_CLIENT_ID:</span> <span class="string">&lt;Your</span> <span class="string">Client</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">      BLACKFIRE_CLIENT_TOKEN:</span> <span class="string">&lt;Your</span> <span class="string">Client</span> <span class="string">Token&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Point-your-PHP-Probe-to-your-Agent"><a href="#3-Point-your-PHP-Probe-to-your-Agent" class="headerlink" title="3. Point your PHP Probe to your Agent"></a>3. Point your PHP Probe to your Agent</h3><p>Add the <code>zz-blackfire.ini</code> file to your php-related configuration files in the repo. In my case it’s: <code>docker/local/php/conf/zz-blackfire.ini</code>.<br>Put the following contents to it:</p>
+<p><strong>zz-blackfire.ini</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; priority=90</span></span><br><span class="line"><span class="comment">; ?priority=90</span></span><br><span class="line"><span class="section">[blackfire]</span></span><br><span class="line"><span class="attr">extension</span>=blackfire.so</span><br><span class="line"><span class="comment">; Default port is 8707.</span></span><br><span class="line"><span class="comment">; You can check the actual configuration by running (see "socket" setting):</span></span><br><span class="line"><span class="comment">;   docker-compose exec blackfire_agent blackfire-agent -d</span></span><br><span class="line"><span class="attr">blackfire.agent_socket</span> = tcp://blackfire_agent:<span class="number">8707</span></span><br><span class="line"><span class="attr">blackfire.agent_timeout</span> = <span class="number">0.25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;Sets fine-grained configuration for Probe.</span></span><br><span class="line"><span class="comment">;This should be left blank in most cases. For most installs,</span></span><br><span class="line"><span class="comment">;the server credentials should only be set in the agent.</span></span><br><span class="line"><span class="comment">;blackfire.server_id =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;Sets fine-grained configuration for Probe.</span></span><br><span class="line"><span class="comment">;This should be left blank in most cases. For most installs,</span></span><br><span class="line"><span class="comment">;the server credentials should only be set in the agent.</span></span><br><span class="line"><span class="comment">;blackfire.server_token =</span></span><br><span class="line"><span class="comment">;blackfire.log_level = 3</span></span><br><span class="line"><span class="comment">;blackfire.log_file = /tmp/blackfire.log</span></span><br></pre></td></tr></table></figure>
+
+<p>Here we set the <code>agent_socket</code> to <code>tcp://blackfire_agent:8707</code>, where “blackfire_agent” is the name of your Agent’s service added above and “8707” is the default port on which the Agent is listening.</p>
+<p>Then mount this file into your application container:</p>
+<p><strong>docker-compose.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  your_php_app_service:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./docker/local/php/conf/zz-blackfire.ini:/usr/local/etc/php/conf.d/zz-blackfire.ini</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="That’s-it"><a href="#That’s-it" class="headerlink" title="That’s it"></a>That’s it</h3><p>Re-build your containers and you are good to go.</p>
+<h2 id="Profiling-from-CLI"><a href="#Profiling-from-CLI" class="headerlink" title="Profiling from CLI"></a>Profiling from CLI</h2><p>Blackfire CLI tool can be used to profile your PHP CLI commands or simple scripts. We installed it to the application container so here is how you run it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">exec</span> your_php_app_service blackfire run bin/magento list</span><br></pre></td></tr></table></figure>
+
+<p>If you need this often I’d suggest to create a <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/#Bin-helper">bin helper</a>.</p>
+<h2 id="Profiling-with-PHP-SDK"><a href="#Profiling-with-PHP-SDK" class="headerlink" title="Profiling with PHP SDK"></a>Profiling with PHP SDK</h2><p>With <a href="https://blackfire.io/docs/reference-guide/php-sdk" target="_blank" rel="noopener">Blackfire PHP SDK</a> you can trigger profiling from PHP code and profile a specific piece of code in your app. You will also have access to profiling results programmatically, which will give you more flexibility to analyze them.</p>
+<p>PHP SDK same as CLI tool uses Client ID and Client Token configuration from environment variables.</p>
+<h3 id="Add-Blackfire-PHP-SDK-as-a-dev-dependency-to-your-project"><a href="#Add-Blackfire-PHP-SDK-as-a-dev-dependency-to-your-project" class="headerlink" title="Add Blackfire PHP SDK as a dev dependency to your project"></a>Add Blackfire PHP SDK as a dev dependency to your project</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require blackfire/php-sdk --dev</span><br></pre></td></tr></table></figure>
+
+<p>Or add the <a href="https://packagist.org/packages/blackfire/php-sdk" target="_blank" rel="noopener">latest package version</a> manually to your <code>composer.json</code>:</p>
+<p><strong>composer.json</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"require-dev": &#123;</span><br><span class="line">  "blackfire/php-sdk": "^1.18"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="That’s-it-1"><a href="#That’s-it-1" class="headerlink" title="That’s it."></a>That’s it.</h3><p>The simplest way to profile a piece of code is:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$blackfire = <span class="keyword">new</span> \Blackfire\Client();</span><br><span class="line">$probe = $blackfire-&gt;createProbe();</span><br><span class="line"></span><br><span class="line"><span class="comment">// some PHP code you want to profile</span></span><br><span class="line"></span><br><span class="line">$profile = $blackfire-&gt;endProbe($probe);</span><br></pre></td></tr></table></figure>
+
+<p>After putting this just open a page in browser or run the CLI command, no need to run profiling with a Companion.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/" data-id="ckkhf397i0004wcvm2owygmkv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blackfire/" rel="tag">blackfire</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/performance/" rel="tag">performance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/profiling/" rel="tag">profiling</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Using Xdebug with Docker Compose and PhpStorm
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/25/Docker-Compose-setup-for-PHP-project/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Docker Compose setup for PHP project</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/architecture/" rel="tag">architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blackfire/" rel="tag">blackfire</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/" rel="tag">cookies</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exceptions/" rel="tag">exceptions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/" rel="tag">function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interface/" rel="tag">interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/namespace/" rel="tag">namespace</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming/" rel="tag">naming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package/" rel="tag">package</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/performance/" rel="tag">performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/profiling/" rel="tag">profiling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/valueobject/" rel="tag">valueobject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/" rel="tag">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xdebug/" rel="tag">xdebug</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/architecture/" style="font-size: 10px;">architecture</a> <a href="/tags/blackfire/" style="font-size: 10px;">blackfire</a> <a href="/tags/cookies/" style="font-size: 10px;">cookies</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 16.67px;">docker-compose</a> <a href="/tags/docker-compose-with-php/" style="font-size: 16.67px;">docker-compose-with-php</a> <a href="/tags/exceptions/" style="font-size: 10px;">exceptions</a> <a href="/tags/function/" style="font-size: 13.33px;">function</a> <a href="/tags/interface/" style="font-size: 13.33px;">interface</a> <a href="/tags/namespace/" style="font-size: 10px;">namespace</a> <a href="/tags/naming/" style="font-size: 13.33px;">naming</a> <a href="/tags/package/" style="font-size: 10px;">package</a> <a href="/tags/performance/" style="font-size: 10px;">performance</a> <a href="/tags/php/" style="font-size: 20px;">php</a> <a href="/tags/profiling/" style="font-size: 10px;">profiling</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/valueobject/" style="font-size: 10px;">valueobject</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/xdebug/" style="font-size: 10px;">xdebug</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/28/File-naming-in-javascript-world/">File naming in JavaScript world</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/">Secure by default set-cookie functions in PHP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/PHP-Namespaces-the-right-way/">PHP Namespaces the right way</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/">Shoot yourself in the foot with Exception</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/">Using Xdebug with Docker Compose and PhpStorm</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Max Hopei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

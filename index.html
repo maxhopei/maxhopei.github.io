@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="YfMvj5FvFivZGWDtu2FiAPf6Mn1PVOkUZXyXBXASZi0" />
+  
+
+  
+  <title>Max&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Technical blog written by Max Hopei">
+<meta name="keywords" content="php, object oriented programming, oop, javascript, nodejs, docker, docker-compose">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Max&#39;s Blog">
+<meta property="og:url" content="https:&#x2F;&#x2F;maxhopei.github.io&#x2F;index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="Technical blog written by Max Hopei">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Max&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h6 id="logo-wrap">
+        <a href="/" id="logo">Max&#39;s Blog</a>
+      </h6>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maxhopei.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-File-naming-in-javascript-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/28/File-naming-in-javascript-world/" class="article-date">
+  <time datetime="2021-01-28T21:59:49.000Z" itemprop="datePublished">2021-01-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/28/File-naming-in-javascript-world/">File naming in JavaScript world</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>One thing that I find confusing in JS/TS culture is file naming when it comes to things, like “something.xyz.ts”.</p>
+<p>Let’s take a look at <a href="https://docs.nestjs.com/" target="_blank" rel="noopener">Nest.js</a>.</p>
+<p>These are some examples from documentation:</p>
+<ul>
+<li>cats.controller.ts: <code>export class CatsController</code></li>
+<li>app.module.ts: <code>export class AppModule</code></li>
+<li>cats.service.ts: <code>export class CatsService</code></li>
+<li>create-cat.dto.ts: <code>export class CreateCatDto</code></li>
+<li>cat.interface.ts: <code>export interface Cat</code></li>
+</ul>
+<p>Along with this some examples from real projects:</p>
+<ul>
+<li>virtual-product.mapper.ts: <code>export class VirtualProductMapper</code></li>
+<li>virtual-product.repository.ts: <code>export class VirtualProductRepository</code></li>
+<li>image-gallery.ts: <code>export class ImageGallery</code></li>
+</ul>
+<p>Some things, like repositories, controllers or services deserve a special case in file names for some reason. Though a “Product Repository” does not differ from an “Image Gallery”, those are just “repository of products” and “gallery of images”. Or a “product mapper”, or an “application module”. There is no sacral exclusive meaning in those.<br>They should all be just: “product-repository.ts”, “product-mapper.ts”, “app-module.ts” and so on.</p>
+<p>Another case is “cat.interface.ts”. Contrary to PHP standards interface names in TypeScript usually don’t include the “Interface” suffix. But why do files do? Why not just “cat.ts”?</p>
+<p>Same applies to enums, i.e.: “order-status.enum.ts”: <code>export enum OrderStatus</code>. Why putting this “.enum” part on a file name?</p>
+<p>Another case from the swagger module:</p>
+<ul>
+<li>type-helpers/omit-type.helper.ts: <code>export function OmitType</code></li>
+</ul>
+<p>It’s just chaotic: the folder says: “type-helpers”, the file name argues: “type.helper”. The function is just “OmitType”, so what’s a “.helper” stands for in the file name? What’s a helper anyways? It’s not a real thing.</p>
+<p>The PSR auto-loading in PHP besides its main value brought consistency here:</p>
+<ul>
+<li>there’s just one thing in a file: a class, an interface or a trait.</li>
+<li>the file name 100% corresponds to the name of that thing.</li>
+</ul>
+<p>This brings peace. </p>
+<p>In code both PHP and JavaScript use PascalCase. JavaScript tends to use kebab or camel case in file names, which is totally fine, but please be consistent: <strong>drop those dots</strong>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2021/01/28/File-naming-in-javascript-world/" data-id="ckkhf397h0003wcvmgs9w0c23" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/naming/" rel="tag">naming</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Secure-by-default-set-cookie-functions-in-PHP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/" class="article-date">
+  <time datetime="2019-12-23T21:46:01.000Z" itemprop="datePublished">2019-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/">Secure by default set-cookie functions in PHP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Recently I studied the <a href="https://blog.chromium.org/2019/10/developers-get-ready-for-new.html" target="_blank" rel="noopener">upcoming changes</a> related to treating the <code>SameSite</code> cookie attribute.<br>And when I’ve got to the <a href="https://wiki.php.net/rfc/same-site-cookie" target="_blank" rel="noopener">respective RFC</a>, proposing a new parameter to the <code>setcookie</code> function, I was disappointed twice. </p>
+<p>The reason to that was the decision taken and the cause of this decision. While I completely understand the historical and cultural base for this decision, I still discourage you to take it as an example solution for your own coding problems.</p>
+<p>So the proposal was: add another parameter to the <code>setcookie</code> function for the ‘SameSite’ flag that was introduced recently. This would be the eights parameter to that function, that already sounds horrifying, but still it was in a “spirit” of this function.</p>
+<p>However the proposal was declined by the voters in favor of another solution, which I would describe as following:</p>
+<pre><code>Let us stop adding parameters to this function, as there are already plenty of them
+ and we don&apos;t know how many will appear in the future. We need a more flexible interface for this.</code></pre><p>Of course, when it comes to flexibility in PHP the Array comes into the game. So the voted alternative signature became:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie ( string $name [, string $value = <span class="string">""</span> [, <span class="keyword">array</span> $options = [] ]] ) : bool</span><br></pre></td></tr></table></figure>
+
+<p>Hurray, now we can pass everything we want! But wait, what can we pass? What are the name of keys in the <code>$options</code> array?<br>Is it ‘expire’ or ‘expires’? Is it ‘httponly’ or ‘HttpOnly’ or maybe ‘http_only? ‘SameSite’ or ‘samesite’? Can I pass ‘maxage’?<br>You will always need to go to php.net to answer these questions. So the interface became absolutely unclear.</p>
+<p>Okay, it’s not an easy thing to support and update a programming language (especially PHP), so let us not throw stones in the voters.<br>Let us instead learn what the problem is and how we can do better.</p>
+<p>Let’s take a look at the <code>setcookie</code> function arguments:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">setcookie (</span><br><span class="line">    string $name, </span><br><span class="line">    string $value = &quot;&quot;, </span><br><span class="line">    int $expires = 0, </span><br><span class="line">    string $path = &quot;&quot;, </span><br><span class="line">    string $domain = &quot;&quot;, </span><br><span class="line">    bool $secure = false, </span><br><span class="line">    bool $httponly = false, </span><br><span class="line">    string $samesite = &quot;&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>The first two, <code>name</code> and <code>value</code>, are the attributes of the cookie itself. The last six are instruction to a browser on how this cookie has to be managed.</p>
+<p>First step would be to introduce a <code>Cookie</code> value object with <code>$name</code> and <code>$value</code> constructor arguments:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setcookie (</span><br><span class="line">    Cookie $cookie, </span><br><span class="line">    int $expires = 0, </span><br><span class="line">    string $path = &quot;&quot;, </span><br><span class="line">    string $domain = &quot;&quot;, </span><br><span class="line">    bool $secure = false, </span><br><span class="line">    bool $httponly = false, </span><br><span class="line">    string $samesite = &quot;&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>$expires</code> parameter indicates the maximum lifetime of the cookie, represented as the timestamp of the date and time at which the cookie expires. The default value, <code>0</code>, means that expiration date is not set for the cookie, so the browser keeps it for the session lifetime.</p>
+<p>Most of the time you will find yourself writing something like: <code>now() + 604800 /* one week */</code> for this parameter. Of course, we want to use a <code>DateTime</code> value object for this as well:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setcookie (</span><br><span class="line">    Cookie $cookie, </span><br><span class="line">    DateTime $expirationDate,</span><br><span class="line">    string $path = &quot;&quot;, </span><br><span class="line">    string $domain = &quot;&quot;, </span><br><span class="line">    bool $secure = false, </span><br><span class="line">    bool $httponly = false, </span><br><span class="line">    string $samesite = &quot;&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>As for the <code>path</code> and <code>domain</code> we could also introduce value objects, but there is no necessity for that. Let’s keep it simple and just stick with strings. We also leave the default values out of scope for now,  otherwise we will need to dig deep into the <a href="http://www.faqs.org/rfcs/rfc6265.html" target="_blank" rel="noopener">HTTP State Management Mechanism RFC</a>. </p>
+<p>However we change the order of the arguments to a more natural one:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setcookie (</span><br><span class="line">    Cookie $cookie, </span><br><span class="line">    DateTime $expires,</span><br><span class="line">    string $domain = &quot;&quot;, </span><br><span class="line">    string $path = &quot;&quot;, </span><br><span class="line">    bool $secure = false, </span><br><span class="line">    bool $httponly = false, </span><br><span class="line">    string $samesite = &quot;&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Now let’s handle the rest of the arguments.<br>First of all, you can see that the function is not <a href="https://en.wikipedia.org/wiki/Secure_by_default" target="_blank" rel="noopener">secure by default</a>. These relates to all three arguments, because they all are about security.<br>Second, these attributes are all just <a href="https://martinfowler.com/bliki/FlagArgument.html" target="_blank" rel="noopener">flags</a>. Flag arguments reduce the readability and hide the intention of the function. Take a look at the example below.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(new Cookie(&apos;sause&apos;, &apos;bbq&apos;), new DateTime(&apos;+1 week&apos;), &apos;example.com&apos;, &apos;/&apos;, true, false, &apos;Strict&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>What are these <code>true, false</code>? Do you remember the order of the arguments?<br>What are other options for the <code>samesite</code> argument? What if I accidentally pass <code>&#39;Steict&#39;</code> instead of <code>&#39;Strict&#39;</code>?<br>What does the default value <code>&quot;&quot;</code> mean for the <code>$samesite</code> argument? Questions, questions. Is there a way to answer them all at once? </p>
+<p>There is: remove the flag arguments and create a separate function for each meaningful state. Here you will end up with 10 functions:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">setSameSiteCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setLaxSameSiteCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setNotSameSiteCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setSameSiteNotHttpOnlyCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setLaxSameSiteNotHttpOnlyCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setNotSameSiteNotHttpOnlyCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setSameSiteNotSecureCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setLaxSameSiteNotSecureCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setSameSiteNotSecureNotHttpOnlyCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br><span class="line">setLaxSameSiteNotSecureNotHttpOnlyCookie(Cookie $cookie, DateTime $expires, string $domain = &quot;&quot;, string $path = &quot;&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>As of the mentioned changes cookies with <code>SameSite=None</code> must be also with <code>Secure</code> flag, otherwise they are ignored, we can skip “not-same-site, not-secure” combinations.</p>
+<p>Now I will just give you some examples, so you can compare their readability by yourselves:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setcookie(&apos;sause&apos;, &apos;bbq&apos;, now() + 60 * 60 * 24 * 7, &apos;/&apos;, &apos;example.com&apos;, true, true, &apos;Lax&apos;);</span><br><span class="line">// vs</span><br><span class="line">setLaxSameSiteCookie(new Cookie(&apos;sause&apos;, &apos;bbq&apos;), new DateTime(&apos;+1 week&apos;), &apos;example.com&apos;, &apos;/&apos;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setcookie(&apos;sause&apos;, &apos;bbq&apos;, strtotime(&apos;+1 month&apos;), &apos;/&apos;, &apos;example.com&apos;, true, false, &apos;Strict&apos;);</span><br><span class="line">// vs</span><br><span class="line">setSameSiteNotHttpOnlyCookie(new Cookie(&apos;sause&apos;, &apos;bbq&apos;), new DateTime(&apos;+1 month&apos;), &apos;example.com&apos;, &apos;/&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>And this one is my favorite:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setcookie(&apos;sause&apos;, &apos;bbq&apos;, now() + 1209600, &apos;/&apos;, &apos;example.com&apos;);</span><br><span class="line">// vs</span><br><span class="line">setLaxSameSiteNotSecureNotHttpOnlyCookie(new Cookie(&apos;sause&apos;, &apos;bbq&apos;), new DateTime(&apos;+2 weeks&apos;), &apos;example.com&apos;, &apos;/&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>The first variant seems so short and easy, yet it hides all the insecurity and uncertainty. It’s so easy to make a mistake there, whereas it is really difficult to do so in the second variant.</p>
+<p>The approach to building interfaces described here helps keeping the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment" target="_blank" rel="noopener">surprise level</a> at a very minimum, thus reduces number of bugs and improves code reading time for your colleagues.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/" data-id="ckkhf3985000pwcvmhnfudtnm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookies/" rel="tag">cookies</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/function/" rel="tag">function</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interface/" rel="tag">interface</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/" rel="tag">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-Namespaces-the-right-way" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/26/PHP-Namespaces-the-right-way/" class="article-date">
+  <time datetime="2019-11-26T13:42:32.113Z" itemprop="datePublished">2019-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/26/PHP-Namespaces-the-right-way/">PHP Namespaces the right way</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Namespaces in PHP are one of things that are left without a proper attention from the standard creators. While this gives a lot of space for creativity, this also results in a messy unpredictable packages structure, sometimes even when just one developer works on a package. Not to say when you work in a team.</p>
+<p>The rules below are reflection of my experience of working on large projects in couple-of-pizzas teams.<br>All of them are based on the single principle: predictability.</p>
+<h2 id="Standard"><a href="#Standard" class="headerlink" title="Standard"></a>Standard</h2><p>Stick to <a href="https://www.php-fig.org/psr/psr-4/" target="_blank" rel="noopener">PSR-4 Autoloader</a> standard. A standard is good for predictability, and this one is a good one. If you are forced to use PSR-1 (or whatever) by the framework, that’s not a big deal. Just follow the rest of the rules, they are not dependant on PSR.</p>
+<h2 id="Public-internal"><a href="#Public-internal" class="headerlink" title="Public/internal"></a>Public/internal</h2><p>Put the classes that are a <strong>public API</strong> of your package as closer to the package root as it is possible.<br>Use deeper nesting level (sub-namespaces) for <strong>internal API</strong> – the components of the public API classes. Internal API classes should be treated as private.</p>
+<h2 id="Sub-namespaces"><a href="#Sub-namespaces" class="headerlink" title="Sub-namespaces"></a>Sub-namespaces</h2><p>Sub-namespaces may be of three types:</p>
+<ul>
+<li>components,</li>
+<li>group of classes,</li>
+<li>subpackage.</li>
+</ul>
+<p>Some rules apply to each type.</p>
+<h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h3><p>Assuming you are using composition and <abbr title="Single Responsibility Principle">SRP</abbr>, your public API classes will be built from smaller components represented by other classes<br>(a <a href="https://martinfowler.com/bliki/DDD_Aggregate.html" target="_blank" rel="noopener">DDD Aggregate</a> is a good example). Normally these components are only used by their container class and should be treated as private/protected.</p>
+<p>Components are put into a sub-namespace named by the container class.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\Acme\ConfigReader           // Public API, uses Merger and Parser as components.</span><br><span class="line">\Acme\ConfigReader\Merger    // Internal API</span><br><span class="line">\Acme\ConfigReader\Parser    // Internal API</span><br></pre></td></tr></table></figure>
+
+<p>Here the <code>\Acme\ConfigReader</code> class is a public API, and no one except it should work directly with <code>\Acme\ConfigReader\Merger</code> or <code>\Acme\ConfigReader\Parser</code>.</p>
+<p>Of course, a component can act as a container for its own sub-components, so this rule applies recursively.</p>
+<h3 id="Group-of-classes"><a href="#Group-of-classes" class="headerlink" title="Group of classes"></a>Group of classes</h3><p>Some design patterns, for example Strategy, which I use often, require several classes that do the same sort of a thing but somehow differently. These classes are often represent different implementation of some Type (or Interface if you like) and are used in a polymorphic manner.</p>
+<p>Such classes may be put into a sub-namespace named by their Type in a plural form.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\Acme\ConfigReaders\Filesystem</span><br><span class="line">\Acme\ConfigReaders\Database</span><br></pre></td></tr></table></figure>
+
+<p>The Type <strong>should not</strong> be duplicated in the class names.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Incorrect</span><br><span class="line">\Acme\ConfigReaders\FilesystemConfigReader</span><br></pre></td></tr></table></figure>
+
+<p>Quite often you would also need to put a Type interface somewhere and a Factory that creates a final implementation based on some input.<br>Here is a common structure:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\Acme\ConfigReaders\Filesystem  // Internal API (concrete implementation), implements \Acme\ConfigReaderInterface</span><br><span class="line">\Acme\ConfigReaders\Database    // Internal API (concrete implementation), implements \Acme\ConfigReaderInterface</span><br><span class="line">\Acme\ConfigReaderFactory       // Public API, creates isntance of \Acme\ConfigReaderInterface</span><br><span class="line">\Acme\ConfigReaderInterface     // Public API</span><br></pre></td></tr></table></figure>
+
+<p>Another use case for this technique is domain-level exceptions classes:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\Acme\Exceptions\SomethingWeirdHappened</span><br><span class="line">\Acme\Exceptions\SomethingWentDrasticallyWrong</span><br></pre></td></tr></table></figure>
+
+<p>However in this case exceptions <strong>are a public API</strong> of the package.</p>
+<h3 id="Subpackages"><a href="#Subpackages" class="headerlink" title="Subpackages"></a>Subpackages</h3><p>Sometimes you might want to organize your package into a subpackages. This may be valid, for example, when your package is a plug-in that affects the behavior of different sub-systems, i.e.: Catalog, Cart and Checkout.</p>
+<p>Respective classes are then put into a sub-namespace named by the subpackage. This approach is similar to the components, but there is no container class in this structure.</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\Acme\Catalog\... (classes related to Catalog)</span><br><span class="line">\Acme\Cart\... (classes related to Cart)</span><br><span class="line">\Acme\Checkout\... (classes related to Checkout)</span><br></pre></td></tr></table></figure>
+
+<p>Grouping by subpackages only makes sense if you have many classes to put in each of them.<br>Otherwise you can just mention the respective sub-system in a class name:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\Acme\CatalogMessageRenderer</span><br><span class="line">\Acme\CartTotalRow</span><br><span class="line">\Acme\CheckoutTotalRow</span><br></pre></td></tr></table></figure>
+
+<p>Anyway I would suggest keeping your packages small. When you are going to introduce a subpackage consider creating a new package first.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/11/26/PHP-Namespaces-the-right-way/" data-id="ckkhf3986000rwcvm1x5m4hch" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/architecture/" rel="tag">architecture</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/namespace/" rel="tag">namespace</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/package/" rel="tag">package</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Shoot-yourself-in-the-foot-with-Exception" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/" class="article-date">
+  <time datetime="2019-11-11T14:30:54.000Z" itemprop="datePublished">2019-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/">Shoot yourself in the foot with Exception</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Zend:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zend_Controller_Request_Http</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Zend_Controller_Request_Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getHeader</span><span class="params">($header)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($header)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Zend_Controller_Request_Exception(<span class="string">'An HTTP header name is required'</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Developer:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$request-&gt;getHeader(<span class="string">'Origin'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>IDE:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(!) Unhandled Zend_Controller_Request_Exception</span><br></pre></td></tr></table></figure>
+
+<p>Why should I handle the exception if <strong>KNOW</strong> that it will never happen?<br /><br>Why should I suffer?</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/" data-id="ckkhf3984000mwcvm6aw357fd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exceptions/" rel="tag">exceptions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Using-Xdebug-with-Docker-Compose-and-PhpStorm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/" class="article-date">
+  <time datetime="2019-06-26T12:50:07.000Z" itemprop="datePublished">2019-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/">Using Xdebug with Docker Compose and PhpStorm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Add-Xdebug-to-your-PHP-application-container"><a href="#1-Add-Xdebug-to-your-PHP-application-container" class="headerlink" title="1. Add Xdebug to your PHP application container"></a>1. Add Xdebug to your PHP application container</h2><p>Add following lines to your php Dockerfile:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install Xdebug</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yes | pecl install xdebug \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">echo</span> <span class="string">"zend_extension=<span class="variable">$(find $(php-config --extension-dir)</span> -name xdebug.so)"</span> \</span></span><br><span class="line"><span class="bash">         &gt; /usr/<span class="built_in">local</span>/etc/php/conf.d/xdebug.ini</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Add-necessary-environment-variables"><a href="#2-Add-necessary-environment-variables" class="headerlink" title="2. Add necessary environment variables"></a>2. Add necessary environment variables</h2><p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  your_php_app_service:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      XDEBUG_ENABLED:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      XDEBUG_REMOTE_AUTOSTART:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      XDEBUG_MAXNESTING_LEVEL:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">      XDEBUG_REMOTE_CONNECT_BACK:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      XDEBUG_REMOTE_HOST:</span> <span class="string">host.docker.internal</span></span><br><span class="line"><span class="attr">      PHP_IDE_CONFIG:</span> <span class="string">serverName=localhost</span></span><br></pre></td></tr></table></figure>
+
+<p>Here we do following things:</p>
+<ol>
+<li>Enable the xdebug extension.</li>
+<li>Enable automatic start on every request (see note on this below).</li>
+<li>Increase default maximal function nesting level, because it is often not enough.</li>
+<li>Instruct XDebug to connect back to the IP where web request came from.</li>
+<li>Instruct XDebug to connect to <code>host.docker.internal</code> for command line execution or whenever “connect back” is not possible. </li>
+<li>Set <code>PHP_IDE_CONFIG</code> env variable to <code>serverName=localhost</code>. This will tell your PhpStorm which server configuration to use. See next step for details.</li>
+</ol>
+<h2 id="3-Configure-server-in-PhpStorm"><a href="#3-Configure-server-in-PhpStorm" class="headerlink" title="3. Configure server in PhpStorm"></a>3. Configure server in PhpStorm</h2><p>In your PhpStorm Settings go to <code>Languages and Frameworks &gt; PHP &gt; Servers</code> and add a new server:</p>
+<ul>
+<li><strong>Name:</strong> localhost</li>
+<li><strong>Host/Port:</strong> whatever host and port you use to open your local website, for example: ‘magento.localhost’ and ‘8080’.</li>
+<li><strong>Debugger:</strong> Xdebug</li>
+<li><strong>Use path mappings:</strong> yes</li>
+</ul>
+<p>Configure the path mapping according to your source code volume mount in <code>docker-compose.yaml</code>.<br /><br>I have the following mount: <code>./magento:/var/www/html</code>, therefore my local <code>./magento</code> directory is mapped to the <code>/var/www/html</code> path on the server.</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>One important thing you need to do is to start listening for PHP debug connections with a small phone icon in your PhpStorm.</p>
+<h3 id="Autostart"><a href="#Autostart" class="headerlink" title="Autostart"></a>Autostart</h3><p>Normally you would need a browser extension, which adds debug session start flag to your requests when you need it.<br>However I found it convenient to enable autostart and only control the XDebug via PhpStorm.<br>The case is that when XDebug tries to start the debugging session but the remote host is not listening, the XDebug does not continue.<br>So when I don’t need to debug, I just switch listening off. I believe this  still adds a small overhead in time for all requests, but for me it is unnoticeable.</p>
+<p>If you don’t like this approach, just disable the autostart and start the session your own way (see: <a href="https://xdebug.org/docs/remote#activate_debugger" target="_blank" rel="noopener">Activate debugger</a>).  </p>
+<h3 id="Creating-Run-Debug-configurations-in-PhpStorm"><a href="#Creating-Run-Debug-configurations-in-PhpStorm" class="headerlink" title="Creating Run/Debug configurations in PhpStorm"></a>Creating Run/Debug configurations in PhpStorm</h3><p>Sometimes it is useful to create and store some specific configuration so you can run it over and over.<br>I will not describe the whole <a href="https://www.jetbrains.com/help/phpstorm/creating-and-editing-run-debug-configurations.html" target="_blank" rel="noopener">Run/Debug configurations</a> topic here but only one Docker-specific aspect: you need to teach your PhpStorm to run PHP interpreter inside your container.</p>
+<p>For this you need to create a new PHP CLI interpreter configuration:</p>
+<ul>
+<li>in your PhpStorm Settings go to <code>Languages and Frameworks &gt; PHP</code> and click the ‘…’ button near the “CLI Interpreter” field.</li>
+<li>in new window add a new interpreter “From Docker, Vagrant, VM, Remote…”</li>
+<li>choose “Docker Compose” radiobutton,</li>
+<li>select or create new Server (use Unix socket to connect to Docker daemon)</li>
+<li>choose Docker Compose Configuration files; in my case I choose two in following order:<ul>
+<li><code>docker-compose.yaml</code></li>
+<li><code>docker-compose.override.yaml</code></li>
+</ul>
+</li>
+<li>select your PHP app service</li>
+<li>choose “Connect to existing container” instead of starting a new one.</li>
+</ul>
+<p>This should be enough, save everything and create your Run/Debug configuration using this CLI interpreter.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/" data-id="ckkhf3987000twcvm64c29pq2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xdebug/" rel="tag">xdebug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Integrating-Blackfire-io-with-Docker-Compose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/" class="article-date">
+  <time datetime="2019-06-26T07:05:32.000Z" itemprop="datePublished">2019-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/">Integrating Blackfire.io with Docker Compose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Blackfire Integration with Docker is fully covered in the official documentation: <a href="https://blackfire.io/docs/integrations/docker" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/docker</a><br>But here is a short summary on how you add support of Blackfire to your project Docker Compose setup.</p>
+<h2 id="Pre-requisites"><a href="#Pre-requisites" class="headerlink" title="Pre-requisites"></a>Pre-requisites</h2><h3 id="1-You’ll-need-to-have-a-Blackfire-account"><a href="#1-You’ll-need-to-have-a-Blackfire-account" class="headerlink" title="1. You’ll need to have a Blackfire account"></a>1. You’ll need to have a Blackfire account</h3><p>Blackfire stores all profiles on their servers so you need access to them.<br>You will be given a Server ID, Server Token, Client ID and Client Token, which you will need later for configuration. These could be found here: <a href="https://blackfire.io/my/settings/credentials" target="_blank" rel="noopener">https://blackfire.io/my/settings/credentials</a>.</p>
+<h3 id="2-You’ll-most-probably-need-a-Blackfire-Companion-in-your-browser"><a href="#2-You’ll-most-probably-need-a-Blackfire-Companion-in-your-browser" class="headerlink" title="2. You’ll (most probably) need a Blackfire Companion in your browser"></a>2. You’ll (most probably) need a Blackfire Companion in your browser</h3><p>It connects to your account and helps starting profiling directly from your browser. Install and configure it as described here:</p>
+<ul>
+<li>Chrome: <a href="https://blackfire.io/docs/integrations/chrome" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/chrome</a></li>
+<li>Firefox: <a href="https://blackfire.io/docs/integrations/firefox" target="_blank" rel="noopener">https://blackfire.io/docs/integrations/firefox</a></li>
+</ul>
+<h2 id="Integrate-Blackfire-with-your-Docker-Compose"><a href="#Integrate-Blackfire-with-your-Docker-Compose" class="headerlink" title="Integrate Blackfire with your Docker Compose"></a>Integrate Blackfire with your Docker Compose</h2><h3 id="1-Add-Blackfire-Agent-to-your-network"><a href="#1-Add-Blackfire-Agent-to-your-network" class="headerlink" title="1. Add Blackfire Agent to your network"></a>1. Add Blackfire Agent to your network</h3><p>Blackfire Agent sends your local profiling results to the Blackfire servers. The easiest way is to add it as a separate container using the official <a href="https://hub.docker.com/r/blackfire/blackfire/" target="_blank" rel="noopener">blackfire/blackfire</a> image:</p>
+<p><strong>docker-compose.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  blackfire_agent:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">blackfire/blackfire</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>The Agent needs <strong>Server ID</strong> and <strong>Server Token</strong> to communicate with Blackfire API. You can configure it using environment variables.</p>
+<p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  blackfire_agent:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="attr">      BLACKFIRE_SERVER_ID:</span> <span class="string">&lt;Your</span> <span class="string">Server</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">      BLACKFIRE_SERVER_TOKEN:</span> <span class="string">&lt;Your</span> <span class="string">Server</span> <span class="string">Token&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Find out more about <code>docker-compose.override.yaml</code> file here: <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/#Using-override-file">Using override file</a>.</p>
+<h3 id="2-Add-Blackfire-PHP-Probe-and-CLI-tool-to-your-application-container"><a href="#2-Add-Blackfire-PHP-Probe-and-CLI-tool-to-your-application-container" class="headerlink" title="2. Add Blackfire PHP Probe and CLI tool to your application container"></a>2. Add Blackfire PHP Probe and CLI tool to your application container</h3><p>Blackfire Probe collects the execution stats and sends it to the Agent.</p>
+<p>Considering that we base on PHP-FPM image add the following lines to your php Dockerfile:</p>
+<p><strong>Dockerfile</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.2</span>-fpm</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># You will need these to run commands below</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y \</span></span><br><span class="line"><span class="bash">    wget \</span></span><br><span class="line"><span class="bash">    gnupg2</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install Blackfire CLI tool and PHP Probe</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget -q -O - https://packages.blackfire.io/gpg.key | apt-key add -</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"deb http://packages.blackfire.io/debian any main"</span> | tee /etc/apt/sources.list.d/blackfire.list</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y blackfire-agent blackfire-php</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>The CLI tool needs <strong>Client ID</strong> and <strong>Client Token</strong> to communicate with Blackfire API. You can configure it using environment variables.</p>
+<p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  your_php_app_service:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="attr">      BLACKFIRE_CLIENT_ID:</span> <span class="string">&lt;Your</span> <span class="string">Client</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">      BLACKFIRE_CLIENT_TOKEN:</span> <span class="string">&lt;Your</span> <span class="string">Client</span> <span class="string">Token&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Point-your-PHP-Probe-to-your-Agent"><a href="#3-Point-your-PHP-Probe-to-your-Agent" class="headerlink" title="3. Point your PHP Probe to your Agent"></a>3. Point your PHP Probe to your Agent</h3><p>Add the <code>zz-blackfire.ini</code> file to your php-related configuration files in the repo. In my case it’s: <code>docker/local/php/conf/zz-blackfire.ini</code>.<br>Put the following contents to it:</p>
+<p><strong>zz-blackfire.ini</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; priority=90</span></span><br><span class="line"><span class="comment">; ?priority=90</span></span><br><span class="line"><span class="section">[blackfire]</span></span><br><span class="line"><span class="attr">extension</span>=blackfire.so</span><br><span class="line"><span class="comment">; Default port is 8707.</span></span><br><span class="line"><span class="comment">; You can check the actual configuration by running (see "socket" setting):</span></span><br><span class="line"><span class="comment">;   docker-compose exec blackfire_agent blackfire-agent -d</span></span><br><span class="line"><span class="attr">blackfire.agent_socket</span> = tcp://blackfire_agent:<span class="number">8707</span></span><br><span class="line"><span class="attr">blackfire.agent_timeout</span> = <span class="number">0.25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;Sets fine-grained configuration for Probe.</span></span><br><span class="line"><span class="comment">;This should be left blank in most cases. For most installs,</span></span><br><span class="line"><span class="comment">;the server credentials should only be set in the agent.</span></span><br><span class="line"><span class="comment">;blackfire.server_id =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;Sets fine-grained configuration for Probe.</span></span><br><span class="line"><span class="comment">;This should be left blank in most cases. For most installs,</span></span><br><span class="line"><span class="comment">;the server credentials should only be set in the agent.</span></span><br><span class="line"><span class="comment">;blackfire.server_token =</span></span><br><span class="line"><span class="comment">;blackfire.log_level = 3</span></span><br><span class="line"><span class="comment">;blackfire.log_file = /tmp/blackfire.log</span></span><br></pre></td></tr></table></figure>
+
+<p>Here we set the <code>agent_socket</code> to <code>tcp://blackfire_agent:8707</code>, where “blackfire_agent” is the name of your Agent’s service added above and “8707” is the default port on which the Agent is listening.</p>
+<p>Then mount this file into your application container:</p>
+<p><strong>docker-compose.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  your_php_app_service:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./docker/local/php/conf/zz-blackfire.ini:/usr/local/etc/php/conf.d/zz-blackfire.ini</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="That’s-it"><a href="#That’s-it" class="headerlink" title="That’s it"></a>That’s it</h3><p>Re-build your containers and you are good to go.</p>
+<h2 id="Profiling-from-CLI"><a href="#Profiling-from-CLI" class="headerlink" title="Profiling from CLI"></a>Profiling from CLI</h2><p>Blackfire CLI tool can be used to profile your PHP CLI commands or simple scripts. We installed it to the application container so here is how you run it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">exec</span> your_php_app_service blackfire run bin/magento list</span><br></pre></td></tr></table></figure>
+
+<p>If you need this often I’d suggest to create a <a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/#Bin-helper">bin helper</a>.</p>
+<h2 id="Profiling-with-PHP-SDK"><a href="#Profiling-with-PHP-SDK" class="headerlink" title="Profiling with PHP SDK"></a>Profiling with PHP SDK</h2><p>With <a href="https://blackfire.io/docs/reference-guide/php-sdk" target="_blank" rel="noopener">Blackfire PHP SDK</a> you can trigger profiling from PHP code and profile a specific piece of code in your app. You will also have access to profiling results programmatically, which will give you more flexibility to analyze them.</p>
+<p>PHP SDK same as CLI tool uses Client ID and Client Token configuration from environment variables.</p>
+<h3 id="Add-Blackfire-PHP-SDK-as-a-dev-dependency-to-your-project"><a href="#Add-Blackfire-PHP-SDK-as-a-dev-dependency-to-your-project" class="headerlink" title="Add Blackfire PHP SDK as a dev dependency to your project"></a>Add Blackfire PHP SDK as a dev dependency to your project</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require blackfire/php-sdk --dev</span><br></pre></td></tr></table></figure>
+
+<p>Or add the <a href="https://packagist.org/packages/blackfire/php-sdk" target="_blank" rel="noopener">latest package version</a> manually to your <code>composer.json</code>:</p>
+<p><strong>composer.json</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"require-dev": &#123;</span><br><span class="line">  "blackfire/php-sdk": "^1.18"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="That’s-it-1"><a href="#That’s-it-1" class="headerlink" title="That’s it."></a>That’s it.</h3><p>The simplest way to profile a piece of code is:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$blackfire = <span class="keyword">new</span> \Blackfire\Client();</span><br><span class="line">$probe = $blackfire-&gt;createProbe();</span><br><span class="line"></span><br><span class="line"><span class="comment">// some PHP code you want to profile</span></span><br><span class="line"></span><br><span class="line">$profile = $blackfire-&gt;endProbe($probe);</span><br></pre></td></tr></table></figure>
+
+<p>After putting this just open a page in browser or run the CLI command, no need to run profiling with a Companion.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/" data-id="ckkhf397i0004wcvm2owygmkv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blackfire/" rel="tag">blackfire</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/performance/" rel="tag">performance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/profiling/" rel="tag">profiling</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Docker-Compose-setup-for-PHP-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/25/Docker-Compose-setup-for-PHP-project/" class="article-date">
+  <time datetime="2019-06-25T12:45:38.000Z" itemprop="datePublished">2019-06-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/25/Docker-Compose-setup-for-PHP-project/">Docker Compose setup for PHP project</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Below I describe how I use Docker Compose for my PHP projects, although most of the concepts are helpful for any technology that you use. I will use Magento as an example, but there’s near-zero Magetno-specific stuff and this will work for any framework that you use.</p>
+<p>I don’t pretend to be the author of all the techniques described here, I give all the thanks and credits to people that actually invented this.</p>
+<h2 id="Folder-structure"><a href="#Folder-structure" class="headerlink" title="Folder structure"></a>Folder structure</h2><p>This is how I organize files in the repo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">│   └── magento</span><br><span class="line">├── docker</span><br><span class="line">│   └── local</span><br><span class="line">│       ├── nginx</span><br><span class="line">│       │   ├── conf</span><br><span class="line">│       │   │   ├── default.conf</span><br><span class="line">│       │   └── Dockerfile</span><br><span class="line">│       └── php</span><br><span class="line">│           ├── conf</span><br><span class="line">│           │   ├── custom-config.ini</span><br><span class="line">│           └── Dockerfile</span><br><span class="line">├── magento</span><br><span class="line">│   ├── bin</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── composer.json</span><br><span class="line">│   └── composer.lock</span><br><span class="line">├── .gitignore</span><br><span class="line">├── docker-compose.override.example.yml</span><br><span class="line">├── docker-compose.override.yml</span><br><span class="line">├── docker-compose.yaml</span><br><span class="line">└── README.md</span><br></pre></td></tr></table></figure>
+
+<p>The <code>docker</code> folder contains all docker-related files except for Docker Compose YAMLs.</p>
+<p>I put all files for local (development) purpose into a <code>local</code> sub-folder. This is becasue you might want to keep different Dockerfiles and configs for diferent environments in your repository as well.</p>
+<p>Say, you have a “Testing” environment. Then:</p>
+<ul>
+<li>put Dockerfiles and configs to <code>docker/testing</code> folder.</li>
+<li>create <code>docker-compose.testing.yaml</code> in the root folder.</li>
+<li>bring your containers up on the testing environemnt by running:<br/> <code>docker-compose -f docker-compose.testing.yaml up --build -d</code></li>
+</ul>
+<p>As local environment is used most often, I prefer local YAML files not to have “.local” suffix, so that I don’t need to specify the list of files each time for <code>docker-compose</code> commands.</p>
+<p><strong>docker-compose.yaml</strong></p>
+<p>The contents should be self-explanatory. The only trick here is using YAML alias (<code>codebase</code>) not to repeat ourselves with mounting application volume to both nginx and php-fpm containers.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_web:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      context:</span> <span class="string">./docker/local/nginx</span></span><br><span class="line"><span class="attr">      dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mage_app</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="meta">&amp;codebase</span> <span class="string">./magento:/var/www/html</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./docker/local/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_app:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      context:</span> <span class="string">./docker/local/php</span></span><br><span class="line"><span class="attr">      dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">mage_db</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="meta">*codebase</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./docker/local/php/conf/custom-config.ini:/usr/local/etc/php/conf.d/custom-config.ini</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_db:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">mariadb:10</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - magento-dbdata:</span><span class="string">/var/lib/mysql</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">MYSQL_DATABASE=magento</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">MYSQL_ALLOW_EMPTY_PASSWORD=No</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">MYSQL_ROOT_PASSWORD=demo</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">['--character-set-server=utf8',</span> <span class="string">'--collation-server=utf8_unicode_ci'</span><span class="string">]</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">  magento-dbdata:</span></span><br></pre></td></tr></table></figure>
+
+<p>As you can see I also prefer to name my services in a more abstract way than just “php” or “nginx”. I like it more because I can change the underlying technology later without much pain (i.e. mariadb to mysql).</p>
+<p>I also include the app name in the service name so that it is possible to run different, let’s say, php containers in the same network.</p>
+<h2 id="Using-override-file"><a href="#Using-override-file" class="headerlink" title="Using override file"></a>Using override file</h2><p>Note that I don’t expose or map any ports in <code>docker-compose.yaml</code> above. I find this important because another developer can have ports that I use already taken on his machine. To manage this I use <code>docker-compose.override.yaml</code> which is loaded by default if present. Find out more about it at <a href="https://docs.docker.com/compose/extends/" target="_blank" rel="noopener">https://docs.docker.com/compose/extends/</a>.</p>
+<p>I keep this file ignorred by GIT and instead version <code>docker-compose.override.example.yaml</code> file, so that it is easy for everyone to start.</p>
+<p><strong>docker-compose.override.yaml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_web:</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"127.0.0.1:8080:80"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_db:</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3326:3306"</span></span><br></pre></td></tr></table></figure>
+
+<p>Here I map nginx container port 80 to local port 8080 so I can open my website in browser: <a href="http://magento.localhost:8080" target="_blank" rel="noopener">http://magento.localhost:8080</a>.</p>
+<p>I also map mariadb container port 3306 to local port 3326 so that I can connect to the database from my local machine: <code>mysql -h 127.0.0.1 -P 3326 -u root -p magento</code>.</p>
+<h2 id="User-permissions-trick"><a href="#User-permissions-trick" class="headerlink" title="User permissions trick"></a>User permissions trick</h2><p>By default docker containers are running from the root user. Sometimes they use custom user, like “nginx” for example. So files that are created in containers might appear owned by root or even unknown user in mounted folders on your local machine.</p>
+<p>To overcome this inconvenience I use the following trick and change the user IDs inside containers to my local user.</p>
+<ol>
+<li>In your Dockerfile define the <code>USER_ID</code> and <code>GROUP_ID</code> args and modify the user from which the container is running:</li>
+</ol>
+<p>For example for nginx we’ll have:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx:<span class="number">1.15</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> USER_ID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">ARG</span> GROUP_ID=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod -u <span class="variable">$&#123;USER_ID&#125;</span> nginx \</span></span><br><span class="line"><span class="bash">    &amp;&amp; groupmod -g <span class="variable">$&#123;GROUP_ID&#125;</span> nginx</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /var/www/html</span></span><br></pre></td></tr></table></figure>
+
+<p>For php-fpm:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> php:<span class="number">7.2</span>-fpm</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> USER_ID=<span class="number">1000</span></span><br><span class="line"><span class="keyword">ARG</span> GROUP_ID=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> usermod -u <span class="variable">$&#123;USER_ID&#125;</span> www-data \</span></span><br><span class="line"><span class="bash">    &amp;&amp; groupmod -g <span class="variable">$&#123;GROUP_ID&#125;</span> www-data</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>In your <code>docker-compose.override.yaml</code> define the actual user and group IDs that you want to use:</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_web:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      args:</span></span><br><span class="line"><span class="attr">        USER_ID:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">        GROUP_ID:</span> <span class="number">1000</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mage_app:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      args:</span></span><br><span class="line"><span class="attr">        USER_ID:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">        GROUP_ID:</span> <span class="number">1000</span></span><br><span class="line">    <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+<p>You can find out your current local user and group IDs with <code>id -u</code> and <code>id -u</code> respectively. Normally in Ubuntu these are both 1000.</p>
+<h2 id="Working-with-Composer"><a href="#Working-with-Composer" class="headerlink" title="Working with Composer"></a>Working with Composer</h2><p>I only work with composer locally, never run it inside the container. This allows me not to care about copying ssh keys, composer repository credentials and other stuff.</p>
+<p>As a disadvantage this leads to necessity of having PHP and Composer installed locally, but I always do have them latest anyway. However it is important to specify the PHP version that you use on the project for composer, so that it installs correct packages. You can do it like this in <code>composer.json</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  "config": &#123;</span><br><span class="line">    "platform": &#123;</span><br><span class="line">      "php": "7.2"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can also specify PHP extensions versions here, see <a href="https://getcomposer.org/doc/06-config.md#platform" target="_blank" rel="noopener">platform section documentation</a> for more capabilities.</p>
+<p>With properly configured platform in <code>composer.json</code> you can avoid adding “–ignore-platform-reqs” to your composer install or update command.</p>
+<h2 id="Bin-helper"><a href="#Bin-helper" class="headerlink" title="Bin helper"></a>Bin helper</h2><p>All modern frameworks have CLI interface for development purposes and it is being used quite often. Normally you must do this inside the container for it to work properly, but that’s not very convenient. The elegant way to improve this is to create a “bin helper” as I call it, which will pass the command you want to the container you need.</p>
+<p>Below is the example for Magento, you can modify it for the framework of your choice:</p>
+<p><strong>bin/magento</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line">BIN_DIR=$(dirname <span class="string">"<span class="variable">$0</span>"</span>)</span><br><span class="line">BASE_DIR=$(dirname <span class="string">"<span class="variable">$BIN_DIR</span>"</span>)</span><br><span class="line"></span><br><span class="line">docker-compose <span class="built_in">exec</span> --user=www-data mage_app /var/www/html/bin/magento <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>So now I just run this as if it would be the actual <code>bin/magento</code> file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/magento cache:flush</span><br></pre></td></tr></table></figure>
+
+<p>That’s it for now.</p>
+<hr>
+<p>Check out related topics:</p>
+<ul>
+<li><a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/" title="Using Xdebug with Docker Compose and PhpStorm">Using Xdebug with Docker Compose and PhpStorm</a></li>
+<li><a href="/2019/06/26/Integrating-Blackfire-io-with-Docker-Compose/" title="Integrating Blackfire.io with Docker Compose">Integrating Blackfire.io with Docker Compose</a></li>
+<li>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2019/06/25/Docker-Compose-setup-for-PHP-project/" data-id="ckkhf397f0001wcvm2m37dww2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Another-naming-problem-reasoning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/15/Another-naming-problem-reasoning/" class="article-date">
+  <time datetime="2018-06-15T13:40:00.000Z" itemprop="datePublished">2018-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/15/Another-naming-problem-reasoning/">Another naming problem reasoning</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>So this time I was thinking about names for boolean methods.</p>
+<p>It started with this example that I saw in our project:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;simpleProductWasSaved($product)) &#123;</span><br><span class="line">    <span class="comment">// some actions</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I assumed that it checks whether the given simple product was saved or not.<br>But I was wrong. Here’s this method:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">simpleProductWasSaved</span><span class="params">(ProductInterface $product)</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'simple'</span> === $product-&gt;getTypeId();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>While looking as a good descriptive method name it was misleading the developer (me) in his understanding of what the program does.</p>
+<p>The author of this code was asking:</p>
+<blockquote>
+<p>Is it a simple product that was saved?</p>
+</blockquote>
+<p>Instead the function asnwered to a different question:</p>
+<blockquote>
+<p>Is this product simple?</p>
+</blockquote>
+<p>Considering that the method doesn’t have a clue about the saving, it has to be called just <code>productIsSimple</code>.</p>
+<p>You may notice that I don’t promote calling boolean functions following the pattern “isSomething” or “hasSomething”. Which might seem reasonable at the first glance saying they are answering some question. But I don’t find it so.</p>
+<p>The most frequent usage of such methods is inside an <code>if</code> construct:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isProductSaleable($product)) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This is just uncomfortable to read, it doesn’t sound like a sentense.<br>And it conflicts with a statement-like expressions with comparison operators that are more than often used in <code>if</code>s.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  |        question         |    |       statement       |</span></span><br><span class="line"><span class="keyword">if</span> (isProductSaleable($product) &amp;&amp; $product-&gt;getPrice() &gt; <span class="number">50</span>) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can extract the value into a variable. But I bet you will call it in a statement-like form:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$productIsSaleable = isProductSaleable($product);</span><br><span class="line"><span class="keyword">if</span> ($productIsSaleable) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Which makes sense because it’s a statement which is either true or false. But what’s the reason of having a function name that is not always comfortable to use?</p>
+<p>Some say that the name starting with “is” or “has” tells about the boolean nature of the function. Mmm. Exactly the same as the name in a form of a statement .</p>
+<p>(I don’t consider naming a variable “$isProductSaleable”)</p>
+<p>So there’s just no reason to name a function in a form of a question.</p>
+<p>Ok, summing up.</p>
+<ol>
+<li><strong>Name boolean functions in a form of a statement, not question.</strong></li>
+<li><strong>Don’t put irrelevant information in the names you give.</strong></li>
+</ol>
+<p>P. S.</p>
+<p>Ah, yes, but that’s ok for class methods to start with “is” or “has” when they say something about the subject:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$product-&gt;isSimple();</span><br></pre></td></tr></table></figure>
+
+<p>This is completely ok, because together with the subjects name it forms a statement.</p>
+<p>So these two can leave together happily:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$product-&gt;isSimple();</span><br><span class="line">$product-&gt;childrenAreInStock();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2018/06/15/Another-naming-problem-reasoning/" data-id="ckkhf397h0002wcvmchfacxwj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/naming/" rel="tag">naming</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Worst-interface-ever-PHP-s-version-compare" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/05/Worst-interface-ever-PHP-s-version-compare/" class="article-date">
+  <time datetime="2018-06-05T12:08:30.000Z" itemprop="datePublished">2018-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/05/Worst-interface-ever-PHP-s-version-compare/">Worst interface ever: PHP&#39;s version_compare()</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>The “Worst interface ever” title goes to <a href="http://php.net/manual/ru/function.version-compare.php" target="_blank" rel="noopener">version_compare()</a>.</p>
+<p>If you pass two versions to <code>version_compare()</code> it acts as <code>&lt;=&gt;</code> operator: returns either <code>-1</code>, <code>0</code> or <code>1</code>, which is totally understandable and reasonable. Even if it is machine-oriented, because this function is designed for the <a href="http://php.net/manual/ru/function.usort.php" target="_blank" rel="noopener">callback-based sorting</a>.</p>
+<p>However when you pass a third optional <code>$operator</code> parameter, it will change the functions behavior so that it returns <code>TRUE</code> or <code>FALSE</code> depending on the comparison result.</p>
+<p>Would you guess if this call will return <code>TRUE</code> or <code>FALSE</code>?</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version_compare(<span class="string">'2.0.1'</span>, <span class="string">'1.5.4'</span>, <span class="string">'&lt;'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Does it correspond to <code>2.0.1 &lt; 1.5.4</code> or to <code>1.5.4 &lt; 2.0.1</code>?</p>
+<p>Conclusions:</p>
+<ol>
+<li><p>Don’t add optional parameters to change the function behavior. Create new interface instead.</p>
+</li>
+<li><p>Make interfaces for humans. This leaves no doubts:</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">version_compare(<span class="string">'2.0.1'</span>, <span class="string">'&lt;'</span>, <span class="string">'1.5.4'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use <a href="https://martinfowler.com/bliki/ValueObject.html" target="_blank" rel="noopener">value-objects</a> if possible, overloading the comparison operator for the specific types:</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Version(<span class="string">'2.0.1'</span>) &lt; <span class="keyword">new</span> Version(<span class="string">'1.5.4'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2018/06/05/Worst-interface-ever-PHP-s-version-compare/" data-id="ckkhf3989000vwcvmbb758llt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/function/" rel="tag">function</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interface/" rel="tag">interface</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/valueobject/" rel="tag">valueobject</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version/" rel="tag">version</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/architecture/" rel="tag">architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blackfire/" rel="tag">blackfire</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/" rel="tag">cookies</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exceptions/" rel="tag">exceptions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/" rel="tag">function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interface/" rel="tag">interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/namespace/" rel="tag">namespace</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming/" rel="tag">naming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package/" rel="tag">package</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/performance/" rel="tag">performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/profiling/" rel="tag">profiling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/valueobject/" rel="tag">valueobject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/" rel="tag">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xdebug/" rel="tag">xdebug</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/architecture/" style="font-size: 10px;">architecture</a> <a href="/tags/blackfire/" style="font-size: 10px;">blackfire</a> <a href="/tags/cookies/" style="font-size: 10px;">cookies</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 16.67px;">docker-compose</a> <a href="/tags/docker-compose-with-php/" style="font-size: 16.67px;">docker-compose-with-php</a> <a href="/tags/exceptions/" style="font-size: 10px;">exceptions</a> <a href="/tags/function/" style="font-size: 13.33px;">function</a> <a href="/tags/interface/" style="font-size: 13.33px;">interface</a> <a href="/tags/namespace/" style="font-size: 10px;">namespace</a> <a href="/tags/naming/" style="font-size: 13.33px;">naming</a> <a href="/tags/package/" style="font-size: 10px;">package</a> <a href="/tags/performance/" style="font-size: 10px;">performance</a> <a href="/tags/php/" style="font-size: 20px;">php</a> <a href="/tags/profiling/" style="font-size: 10px;">profiling</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/valueobject/" style="font-size: 10px;">valueobject</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/xdebug/" style="font-size: 10px;">xdebug</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/28/File-naming-in-javascript-world/">File naming in JavaScript world</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/">Secure by default set-cookie functions in PHP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/PHP-Namespaces-the-right-way/">PHP Namespaces the right way</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/">Shoot yourself in the foot with Exception</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/">Using Xdebug with Docker Compose and PhpStorm</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Max Hopei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

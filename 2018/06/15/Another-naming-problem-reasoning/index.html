@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="YfMvj5FvFivZGWDtu2FiAPf6Mn1PVOkUZXyXBXASZi0" />
+  
+
+  
+  <title>Another naming problem reasoning | Max&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="So this time I was thinking about names for boolean methods. It started with this example that I saw in our project: 123if ($this-&amp;gt;simpleProductWasSaved($product)) &amp;#123;    &#x2F;&#x2F; some actions&amp;#125;">
+<meta name="keywords" content="naming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Another naming problem reasoning">
+<meta property="og:url" content="https:&#x2F;&#x2F;maxhopei.github.io&#x2F;2018&#x2F;06&#x2F;15&#x2F;Another-naming-problem-reasoning&#x2F;index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="So this time I was thinking about names for boolean methods. It started with this example that I saw in our project: 123if ($this-&amp;gt;simpleProductWasSaved($product)) &amp;#123;    &#x2F;&#x2F; some actions&amp;#125;">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-01-28T22:01:11.660Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Max&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h6 id="logo-wrap">
+        <a href="/" id="logo">Max&#39;s Blog</a>
+      </h6>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://maxhopei.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Another-naming-problem-reasoning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/15/Another-naming-problem-reasoning/" class="article-date">
+  <time datetime="2018-06-15T13:40:00.000Z" itemprop="datePublished">2018-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Another naming problem reasoning
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>So this time I was thinking about names for boolean methods.</p>
+<p>It started with this example that I saw in our project:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;simpleProductWasSaved($product)) &#123;</span><br><span class="line">    <span class="comment">// some actions</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I assumed that it checks whether the given simple product was saved or not.<br>But I was wrong. Here’s this method:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">simpleProductWasSaved</span><span class="params">(ProductInterface $product)</span>: <span class="title">bool</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'simple'</span> === $product-&gt;getTypeId();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>While looking as a good descriptive method name it was misleading the developer (me) in his understanding of what the program does.</p>
+<p>The author of this code was asking:</p>
+<blockquote>
+<p>Is it a simple product that was saved?</p>
+</blockquote>
+<p>Instead the function asnwered to a different question:</p>
+<blockquote>
+<p>Is this product simple?</p>
+</blockquote>
+<p>Considering that the method doesn’t have a clue about the saving, it has to be called just <code>productIsSimple</code>.</p>
+<p>You may notice that I don’t promote calling boolean functions following the pattern “isSomething” or “hasSomething”. Which might seem reasonable at the first glance saying they are answering some question. But I don’t find it so.</p>
+<p>The most frequent usage of such methods is inside an <code>if</code> construct:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isProductSaleable($product)) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This is just uncomfortable to read, it doesn’t sound like a sentense.<br>And it conflicts with a statement-like expressions with comparison operators that are more than often used in <code>if</code>s.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  |        question         |    |       statement       |</span></span><br><span class="line"><span class="keyword">if</span> (isProductSaleable($product) &amp;&amp; $product-&gt;getPrice() &gt; <span class="number">50</span>) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can extract the value into a variable. But I bet you will call it in a statement-like form:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$productIsSaleable = isProductSaleable($product);</span><br><span class="line"><span class="keyword">if</span> ($productIsSaleable) &#123;</span><br><span class="line">    <span class="comment">// sale it</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Which makes sense because it’s a statement which is either true or false. But what’s the reason of having a function name that is not always comfortable to use?</p>
+<p>Some say that the name starting with “is” or “has” tells about the boolean nature of the function. Mmm. Exactly the same as the name in a form of a statement .</p>
+<p>(I don’t consider naming a variable “$isProductSaleable”)</p>
+<p>So there’s just no reason to name a function in a form of a question.</p>
+<p>Ok, summing up.</p>
+<ol>
+<li><strong>Name boolean functions in a form of a statement, not question.</strong></li>
+<li><strong>Don’t put irrelevant information in the names you give.</strong></li>
+</ol>
+<p>P. S.</p>
+<p>Ah, yes, but that’s ok for class methods to start with “is” or “has” when they say something about the subject:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$product-&gt;isSimple();</span><br></pre></td></tr></table></figure>
+
+<p>This is completely ok, because together with the subjects name it forms a statement.</p>
+<p>So these two can leave together happily:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$product-&gt;isSimple();</span><br><span class="line">$product-&gt;childrenAreInStock();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://maxhopei.github.io/2018/06/15/Another-naming-problem-reasoning/" data-id="ckkhf397h0002wcvmchfacxwj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/naming/" rel="tag">naming</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/25/Docker-Compose-setup-for-PHP-project/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Docker Compose setup for PHP project
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/05/Worst-interface-ever-PHP-s-version-compare/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Worst interface ever: PHP&#39;s version_compare()</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/architecture/" rel="tag">architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blackfire/" rel="tag">blackfire</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/" rel="tag">cookies</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose-with-php/" rel="tag">docker-compose-with-php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exceptions/" rel="tag">exceptions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/" rel="tag">function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interface/" rel="tag">interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/namespace/" rel="tag">namespace</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming/" rel="tag">naming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package/" rel="tag">package</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/performance/" rel="tag">performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/profiling/" rel="tag">profiling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/valueobject/" rel="tag">valueobject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version/" rel="tag">version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xdebug/" rel="tag">xdebug</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/architecture/" style="font-size: 10px;">architecture</a> <a href="/tags/blackfire/" style="font-size: 10px;">blackfire</a> <a href="/tags/cookies/" style="font-size: 10px;">cookies</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 16.67px;">docker-compose</a> <a href="/tags/docker-compose-with-php/" style="font-size: 16.67px;">docker-compose-with-php</a> <a href="/tags/exceptions/" style="font-size: 10px;">exceptions</a> <a href="/tags/function/" style="font-size: 13.33px;">function</a> <a href="/tags/interface/" style="font-size: 13.33px;">interface</a> <a href="/tags/namespace/" style="font-size: 10px;">namespace</a> <a href="/tags/naming/" style="font-size: 13.33px;">naming</a> <a href="/tags/package/" style="font-size: 10px;">package</a> <a href="/tags/performance/" style="font-size: 10px;">performance</a> <a href="/tags/php/" style="font-size: 20px;">php</a> <a href="/tags/profiling/" style="font-size: 10px;">profiling</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/valueobject/" style="font-size: 10px;">valueobject</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/xdebug/" style="font-size: 10px;">xdebug</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/28/File-naming-in-javascript-world/">File naming in JavaScript world</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/23/Secure-by-default-set-cookie-functions-in-PHP/">Secure by default set-cookie functions in PHP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/PHP-Namespaces-the-right-way/">PHP Namespaces the right way</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/11/Shoot-yourself-in-the-foot-with-Exception/">Shoot yourself in the foot with Exception</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/26/Using-Xdebug-with-Docker-Compose-and-PhpStorm/">Using Xdebug with Docker Compose and PhpStorm</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Max Hopei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
